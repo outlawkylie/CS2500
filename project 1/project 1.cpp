@@ -19,18 +19,25 @@ int main()
     /****************************************
     *  Variables
     *****************************************/
-    const short int NUM_TRIALS = 100;
-    long long trial_duration = 0;
+    const short int NUM_TRIALS     = 100;
+    const short int N_SKIP         = 500;
+    const short int N_MAX          = 10000;
+    long long       trial_duration = 0;
 
 
     /****************************************
     *  Sort Random Trials
     *****************************************/
     ofstream output( "output_random.txt" );
-    for( int i = 0; i < NUM_TRIALS; i++ )
+    for( short int i = N_SKIP; i <= N_MAX; i+= N_SKIP )
         {
-        trial_duration = insertion_sort_normal();
-        output << trial_duration << ", ";
+        output << i << ", ";
+        for( int j = 0; j < NUM_TRIALS; j++ )
+            {
+            trial_duration = insertion_sort_normal( i );
+            output << trial_duration << ", ";
+            }
+        output << "\n";
         }
     output.close();
 
@@ -38,10 +45,14 @@ int main()
     *  Sort Best Case Trials
     *****************************************/
     ofstream output2( "output_best.txt" );
-    for( int i = 0; i < NUM_TRIALS; i++ )
+    for( short int i = N_SKIP; i < N_MAX; i += N_SKIP )
         {
-        trial_duration = insertion_sort_best();
-        output2 << trial_duration << ", ";
+        for( int j = 0; j < NUM_TRIALS; j++ )
+            {
+            trial_duration = insertion_sort_best( i );
+            output << trial_duration << ", ";
+            }
+        output2 << "\n";
         }
     output2.close();
 
@@ -49,10 +60,14 @@ int main()
     *  Sort Worst Case Trials
     *****************************************/
     ofstream output3( "output_worst.txt" );
-    for( int i = 0; i < NUM_TRIALS; i++ )
+    for( short int i = N_SKIP; i < N_MAX; i += N_SKIP )
         {
-        trial_duration = insertion_sort_worst();
-        output3 << trial_duration << ", ";
+        for( int j = 0; j < NUM_TRIALS; j++ )
+            {
+            trial_duration = insertion_sort_worst( i );
+            output << trial_duration << ", ";
+            }
+        output3 << "\n";
         }
     output3.close();
 

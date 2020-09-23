@@ -6,7 +6,7 @@
 using namespace std;
 
 /* Constants */
-const short int ARRAY_SIZE = 10000;
+const short int ARRAY_SIZE = 100;
 
 /* Class Declarations */
 class sortclass
@@ -14,10 +14,12 @@ class sortclass
     public:
         // constructor 
         sortclass();
+        sortclass( short int arr_size );
 
         // variables
-        short int size = ARRAY_SIZE;
-        unsigned short int unsorted_array[ ARRAY_SIZE ];
+        short int default_size = ARRAY_SIZE;
+        short int size = 0;
+        unsigned short int * unsorted_array;
 
 
         // functions
