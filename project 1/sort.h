@@ -17,7 +17,7 @@ class sortclass
 
         // variables
         short int size = ARRAY_SIZE;
-        short int unsorted_array[ ARRAY_SIZE ];
+        unsigned short int unsorted_array[ ARRAY_SIZE ];
 
 
         // functions
