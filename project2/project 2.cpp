@@ -7,10 +7,12 @@
 #include <fstream>
 #include <chrono>
 #include <time.h>
-using namespace std;
+#include <string.h>
+#include <cstring>
 
 #include "sort.h"
 #include "imp.h"
+using namespace std;
 
 int main()
     {
@@ -20,18 +22,11 @@ int main()
     srand( time( NULL ) );
 
     /****************************************
-    *  Constants
-    *****************************************/
-    const short int NUM_TRIALS     = 10;
-    const short int N_SKIP         = 50;
-    const short int N_MAX          = 500;
-    long long       trial_duration = 0;
-    unsigned short int i           = 0;
-
-    /****************************************
     *  Sort Random Trials
     *****************************************/
-    
+    run_test((int)NORMAL_CASE, (int)HEAPSORT, (string)(NAME_NORMAL+"_"+NAME_HEAP+".txt"));
+    run_test((int)NORMAL_CASE, (int)SELECTIONSORT, (string)(NAME_NORMAL + "_" + NAME_SELECTION + ".txt"));
+
 
 
     return 0;

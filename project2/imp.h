@@ -5,7 +5,10 @@
 
 #ifndef IMP_H
 #define IMP_H
+
+#include <iostream>
 #include <string.h>
+using namespace std;
 
 
 /******************************************************************
@@ -19,6 +22,15 @@ enum TEST_CASE_TYPE
     SAME_CASE
     };
 
+enum SORT_TYPE
+    {
+    INSERTIONSORT,
+    QUICKSORT,
+    MERGESORT,
+    HEAPSORT,
+    SELECTIONSORT
+    };
+
 /******************************************************************
 *   CONSTANTS
 ******************************************************************/
@@ -30,10 +42,13 @@ const string NAME_MERGE     = "MERGESORT";
 const string NAME_QUICK     = "QUICKSORT";
 const string NAME_HEAP      = "HEAPSORT";
 const string NAME_SELECTION = "SELECTIONSORT";
+const string NAME_INSERTION = "INSERTIONSORT";
 
-const short int NUM_TRIALS  = 10;
-const short int N_SKIP      = 50;
-const short int N_MAX       = 500;
+const short int NUM_TRIALS  = 1;
+const short int N_SKIP      = 10;
+const short int N_MAX       = 20;
+
+void run_test(int type, int sort, const string name);
 
 
 /******************************************************************
@@ -41,5 +56,6 @@ const short int N_MAX       = 500;
 ******************************************************************/
 template <typename T>
 void print_array( T arr[], int size ); //Print the array
+
 
 #endif

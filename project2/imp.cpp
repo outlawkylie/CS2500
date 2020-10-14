@@ -27,100 +27,74 @@ void print_array(T arr[], int size)
     return;
     }
 
-
-/******************************************************************
-*   NAME: insertion_sort_normal()
-*
-*   DESCRIPTION: runs the insertion sort program on a random array
-*                and returns time taken to sort in ns
-******************************************************************/
-template <typename T>
-long long insertion_sort_normal( short int size )
-    {
-    sortclass<T>* sort = new sortclass( size ); 
-    auto start = chrono::high_resolution_clock::now();
-    sort->insertion_sort();
-    auto stop = chrono::high_resolution_clock::now();
-    auto duration = chrono::duration_cast<chrono::nanoseconds>(stop - start);
-    delete sort;
-    return duration.count();
-    }
-
-
-/******************************************************************
-*   NAME: insertion_sort_best()
-*
-*   DESCRIPTION: runs the insertion sort program on a best case 
-*                array and returns time taken to sort in ns
-******************************************************************/
-template <typename T>
-long long insertion_sort_best( short int size )
-    {
-    sortclass<T>* sort = new sortclass( size );
-    sort->array_to_bestcase();
-    auto start = chrono::high_resolution_clock::now();
-    sort->insertion_sort();
-    auto stop = chrono::high_resolution_clock::now();
-    auto duration = chrono::duration_cast<chrono::nanoseconds>(stop - start);
-    delete sort;
-    return duration.count();
-    }
-
-
-/******************************************************************
-*   NAME:
-*
-*   DESCRIPTION: runs the insertion sort program on a worst case
-*                array and returns time taken to sort in ns
-******************************************************************/
-template <typename T>
-long long insertion_sort_worst( short int size )
-    {
-    sortclass<T>* sort = new sortclass( size );
-    sort->array_to_worstcase();
-    auto start = chrono::high_resolution_clock::now();
-    sort->insertion_sort();
-    auto stop = chrono::high_resolution_clock::now();
-    auto duration = chrono::duration_cast<chrono::nanoseconds>(stop - start);
-    delete sort;
-    return duration.count();
-    }
-
-template <typename T>
-void run_test(int type, sortclass<T> test, int size, string name)
+void run_test(int type, int sort, const string name)
     {
     /*  Variables  */
     long long trial_duration = 0;
 
     /* Run the test */
-    ofstream output( name+".txt" );
-    for (int i = N_SKIP; i <= N_MAX; i += N_SKIP)
+    ofstream output(name); //setup output TXT file
+
+    // Run through each length 
+    for (int i = 0; i <= N_MAX; i += N_SKIP)
         {
+        sortclass<int>* tester = new sortclass<int>(i);
         output<<i<<", "; //output number of elements in array
+
+        // Run the test NUM_TRIALS number of times
         for (int j = 0; j < NUM_TRIALS; j++)
             {
-            //get time in ns for sort to run and output to txt
-            switch (type)
+            /* First, sort the array to match its best/worst scenario */
+            switch ( type )
                 {
                 case BEST_CASE:
-                    test->array_to_bestcase();
+                    tester->array_to_bestcase();
                     break;
 
                 case NORMAL_CASE:
-                    test->array_to_random();
+                    tester->array_to_random();
                     break;
 
                 case WORST_CASE:
-                    test->array_to_worstcase();
+                    tester->array_to_worstcase();
                     break;
 
                 case SAME_CASE:
-                    test->array_to_samecase();
+                    tester->array_to_same();
                     break;
                      
                 default:
                     break;
                 }
+            print_array(tester->unsorted_array, tester->size);
+            /* Next, run the sort required for this test */
+            switch ( sort )
+                {
+                case INSERTIONSORT:
+                    trial_duration = tester->insertion_sort();
+                    break;
+
+                case QUICKSORT:
+                    trial_duration = tester->quick_sort();
+                    break;
+
+                case MERGESORT:
+                    trial_duration = tester->merge_sort();
+                    break;
+
+                case HEAPSORT:
+                    trial_duration = tester->heap_sort();
+                    break;
+
+                case SELECTIONSORT:
+                    trial_duration = tester->selection_sort();
+
+                default:
+                    break;
+                }
+            print_array(tester->unsorted_array, tester->size);
+
             }
+        delete[] tester->unsorted_array;
         }
     }

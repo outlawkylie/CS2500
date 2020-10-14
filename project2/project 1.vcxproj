@@ -154,10 +154,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="imp.cpp" />
-    <ClCompile Include="project 1.cpp" />
-    <ClCompile Include="sort.cpp" />
+    <ClCompile Include="project 2.cpp" />
     <ClInclude Include="imp.h" />
     <ClInclude Include="sort.h" />
+    <ClInclude Include="sort.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

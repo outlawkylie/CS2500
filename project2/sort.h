@@ -5,13 +5,10 @@
 
 #ifndef SORT_H
 #define SORT_H
+
 #include <iostream>
 using namespace std;
 
-/******************************************************************
-*   CONSTANTS
-******************************************************************/
-const short int ARRAY_SIZE = 10;
 
 /******************************************************************
 *   CLASSES
@@ -25,7 +22,6 @@ class sortclass
         sortclass( short int arr_size );
 
         // variables
-        T default_size = ARRAY_SIZE;
         T size = 0;
         T * unsorted_array;
 
@@ -38,8 +34,16 @@ class sortclass
 
 
         // sort functions
-        void insertion_sort( void );
+        long long insertion_sort( void );
+        long long quick_sort( void ); 
+        long long merge_sort( void );
+        long long heap_sort( void );
+        long long selection_sort( void );
+
+        // supporting sort functions
+        void max_heapify( T arr[], int size, int i ); 
 
     };
 
+#include "sort.hpp"
 #endif
