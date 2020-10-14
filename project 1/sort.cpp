@@ -1,7 +1,13 @@
+// Author: Kylie Outlaw
+// Date: 9/27/2020
+// Purpose: Sort class constructor and function definitions
+
 #include "sort.h"
 #include <iostream>
 using namespace std;
 
+
+/* Default Constructor */
 sortclass::sortclass()
     {
     size = default_size;
@@ -12,6 +18,8 @@ sortclass::sortclass()
         }
     }
 
+
+/* Parameterized Constructor */
 sortclass::sortclass( short int arr_size )
     {
     size = arr_size;
@@ -23,6 +31,11 @@ sortclass::sortclass( short int arr_size )
     }
 
 
+/******************************************************************
+*   NAME: print_array()
+*
+*   DESCRIPTION: prints any array to terminal given the size
+******************************************************************/
 void sortclass::insertion_sort( void )
     {
     for( int i = 1; i<size; i++ )
@@ -39,6 +52,13 @@ void sortclass::insertion_sort( void )
     return;
     }
 
+
+/******************************************************************
+*   NAME: array_to_bestcase()
+*
+*   DESCRIPTION: adjusts all elements in unsorted_array to be
+*                best case scenario
+******************************************************************/
 void sortclass::array_to_bestcase( void )
     {
     for( int i = 0; i < size; i++ )
@@ -47,6 +67,13 @@ void sortclass::array_to_bestcase( void )
         }
     }
 
+
+/******************************************************************
+*   NAME: array_to_worstcase()
+*
+*   DESCRIPTION: adjusts all elements in unsorted_array to be
+*                worst case scenario
+******************************************************************/
 void sortclass::array_to_worstcase( void )
     {
     for( int i = 0; i < size; i++ )
@@ -55,10 +82,31 @@ void sortclass::array_to_worstcase( void )
         }
     }
 
+
+/******************************************************************
+*   NAME: array_to_bestcase()
+*
+*   DESCRIPTION: adjusts all elements in unsorted_array to be
+*                random case scenario
+******************************************************************/
 void sortclass::array_to_random( void )
     {
     for( int i = 0; i < size; i++ )
         {
         unsorted_array[ i ] = rand() % 100;
+        }
+    }
+
+
+/******************************************************************
+*   NAME: array_to_same()
+*
+*   DESCRIPTION: adjusts all elements in unsorted_array to be same
+******************************************************************/
+void sortclass::array_to_same( void )
+    {
+    for (int i = 0; i < size; i++)
+        {
+        unsorted_array[i] = 1;
         }
     }

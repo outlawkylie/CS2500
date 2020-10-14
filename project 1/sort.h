@@ -1,3 +1,8 @@
+// Author: Kylie Outlaw
+// Date: 9/27/2020
+// Purpose: Class definition for the implementation of the insertion sort algorithm
+
+
 #ifndef SORT_H
 #define SORT_H
 
@@ -6,7 +11,7 @@
 using namespace std;
 
 /* Constants */
-const short int ARRAY_SIZE = 100;
+const short int ARRAY_SIZE = 10;
 
 /* Class Declarations */
 class sortclass
@@ -22,10 +27,12 @@ class sortclass
         unsigned short int * unsorted_array;
 
 
-        // functions
+        // functions to set up array
         void array_to_bestcase( void ); 
         void array_to_worstcase( void ); 
         void array_to_random( void );
+        void array_to_same( void ); 
+
 
         // sort functions
         void insertion_sort( void );
