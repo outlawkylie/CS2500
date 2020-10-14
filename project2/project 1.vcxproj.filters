@@ -15,13 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\%2720 Fall\Algorithms\project 1\project 1\project 1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="sort.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\%2720 Fall\Algorithms\project 1\project 1\imp.cpp">
+    <ClCompile Include="imp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="project 1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -29,7 +29,7 @@
     <ClInclude Include="sort.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\%2720 Fall\Algorithms\project 1\project 1\imp.h">
+    <ClInclude Include="imp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
