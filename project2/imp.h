@@ -45,8 +45,8 @@ const string NAME_SELECTION = "SELECTIONSORT";
 const string NAME_INSERTION = "INSERTIONSORT";
 
 const short int NUM_TRIALS  = 30;
-const short int N_SKIP      = 250;
-const short int N_MAX       = 3500;
+const short int N_SKIP      = 500;
+const short int N_MAX       = 10000;
 
 void run_test(int type, int sort, const string name);
 

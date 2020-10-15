@@ -106,6 +106,8 @@ template <typename T>
 void sortclass<T>::merge_sort( int low, int high )
     {
     int middle;
+    // assert if low&high not valid or if array of size 0 or 1
+    assert(low<high); //check if low and high values are valid
     if (low < high)
         {
         middle = (low+high)/2;
@@ -130,31 +132,38 @@ void sortclass<T>::merge(int low, int high, int mid)
     i = low;
     k = low;
     j = mid + 1;
-    while (i <= mid && j <= high) {
-        if (unsorted_array[i] < unsorted_array[j]) {
+    while (i <= mid && j <= high) 
+        {
+        if (unsorted_array[i] < unsorted_array[j]) 
+            {
             new_array[k] = unsorted_array[i];
             k++;
             i++;
             }
-        else {
+        else 
+            {
             new_array[k] = unsorted_array[j];
             k++;
             j++;
             }
         }
-    while (i <= mid) {
+    while (i <= mid) 
+        {
         new_array[k] = unsorted_array[i];
         k++;
         i++;
         }
-    while (j <= high) {
+    while (j <= high) 
+        {
         new_array[k] = unsorted_array[j];
         k++;
         j++;
         }
-    for (i = low; i < k; i++) {
+    for (i = low; i < k; i++) 
+        {
         unsorted_array[i] = new_array[i];
         }
+    delete new_array;
     }
     
 
