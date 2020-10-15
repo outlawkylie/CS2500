@@ -35,11 +35,8 @@ sortclass<T>::sortclass(short int arr_size)
 *                perform insertion sort
 ******************************************************************/
 template <typename T>
-long long sortclass<T>::insertion_sort(void)
+void sortclass<T>::insertion_sort(void)
     {
-    auto start = chrono::high_resolution_clock::now();
-
-
     for (int i = 1; i < size; i++)
         {
         T key = unsorted_array[i];
@@ -51,35 +48,23 @@ long long sortclass<T>::insertion_sort(void)
             }
         unsorted_array[j] = key;
         }
-
-    auto stop = chrono::high_resolution_clock::now();
-    auto duration = chrono::duration_cast<chrono::nanoseconds>(stop - start);
-    return duration.count();
     }
 
 
 /******************************************************************
 *   NAME: quick_sort()
 *
-*   DESCRIPTION: returns the amount of time in ns required to
-*                perform quick sort
+*   DESCRIPTION: sorts the array using quicksort method
 ******************************************************************/
 template <typename T>
-long long sortclass<T>::quick_sort( int low, int high )
+void sortclass<T>::quick_sort( int low, int high )
     {
-    auto start = chrono::high_resolution_clock::now();
     if (low < high)
         {
         int test = quick_sort_partition( low, high );
         quick_sort( low, test-1 );
         quick_sort( test+1, high );
         }
-
-
-
-    auto stop = chrono::high_resolution_clock::now();
-    auto duration = chrono::duration_cast<chrono::nanoseconds>(stop - start);
-    return duration.count();
     }
 
 /******************************************************************
@@ -118,10 +103,8 @@ int sortclass<T>::quick_sort_partition( int low, int high )
 *                perform merge sort
 ******************************************************************/
 template <typename T>
-long long sortclass<T>::merge_sort( int low, int high )
+void sortclass<T>::merge_sort( int low, int high )
     {
-    auto start = chrono::high_resolution_clock::now();
-
     int middle;
     if (low < high)
         {
@@ -130,10 +113,6 @@ long long sortclass<T>::merge_sort( int low, int high )
         merge_sort( middle+1, high);
         merge(low, high, middle);
         }
-
-    auto stop = chrono::high_resolution_clock::now();
-    auto duration = chrono::duration_cast<chrono::nanoseconds>(stop - start);
-    return duration.count();
     }
 
 
@@ -225,9 +204,8 @@ void sortclass<T>::max_heapify(T arr[], int sz, int i)
 *                perform heap sort
 ******************************************************************/
 template <typename T>
-long long sortclass<T>::heap_sort(void)
+void sortclass<T>::heap_sort(void)
     {
-    auto start = chrono::high_resolution_clock::now();
     int sz = size;
     // build max heap
     for (int i = (sz / 2) - 1; i >= 0; i--)
@@ -245,10 +223,6 @@ long long sortclass<T>::heap_sort(void)
 
         max_heapify(unsorted_array, i, 0);
         }
-
-    auto stop = chrono::high_resolution_clock::now();
-    auto duration = chrono::duration_cast<chrono::nanoseconds>(stop - start);
-    return duration.count();
     }
 
 
@@ -259,9 +233,8 @@ long long sortclass<T>::heap_sort(void)
                  perform selection sort
 ******************************************************************/
 template <typename T>
-long long sortclass<T>::selection_sort(void)
+void sortclass<T>::selection_sort(void)
     {
-    auto start = chrono::high_resolution_clock::now();
     int min=0, i=0, j=0; 
     for ( i = 0; i < size; i++)
         {
@@ -277,9 +250,6 @@ long long sortclass<T>::selection_sort(void)
         unsorted_array[min] = unsorted_array[i];
         unsorted_array[i] = temp;
         }
-    auto stop = chrono::high_resolution_clock::now();
-    auto duration = chrono::duration_cast<chrono::nanoseconds>(stop - start);
-    return duration.count();
     }
 
 

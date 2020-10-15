@@ -34,11 +34,11 @@ class sortclass
 
 
         // sort functions
-        long long insertion_sort( void );
-        long long quick_sort( int low, int high ); 
-        long long merge_sort( int low, int high );
-        long long heap_sort( void );
-        long long selection_sort( void );
+        void insertion_sort( void );
+        void quick_sort( int low, int high ); 
+        void merge_sort( int low, int high );
+        void heap_sort( void );
+        void selection_sort( void );
 
         // supporting sort functions
         void max_heapify( T arr[], int size, int i ); 

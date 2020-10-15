@@ -40,7 +40,7 @@ void run_test(int type, int sort, const string name)
     for (int i = 0; i <= N_MAX; i += N_SKIP)
         {
         sortclass<int>* tester = new sortclass<int>(i);
-        output<<i<<", "; //output number of elements in array
+        //output<<i<<", "; //output number of elements in array
 
         // Run the test NUM_TRIALS number of times
         for (int j = 0; j < NUM_TRIALS; j++)
@@ -68,30 +68,34 @@ void run_test(int type, int sort, const string name)
                     break;
                 }
             /* Next, run the sort required for this test */
+            auto start = chrono::high_resolution_clock::now();
             switch ( sort )
                 {
                 case INSERTIONSORT:
-                    trial_duration = tester->insertion_sort();
+                    tester->insertion_sort();
                     break;
 
                 case QUICKSORT:
-                    trial_duration = tester->quick_sort( 0, tester->size-1);
+                    tester->quick_sort( 0, tester->size-1);
                     break;
 
                 case MERGESORT:
-                    trial_duration = tester->merge_sort(0, tester->size-1);
+                    tester->merge_sort(0, tester->size-1);
                     break;
 
                 case HEAPSORT:
-                    trial_duration = tester->heap_sort();
+                    tester->heap_sort();
                     break;
 
                 case SELECTIONSORT:
-                    trial_duration = tester->selection_sort();
+                    tester->selection_sort();
 
                 default:
                     break;
                 }
+                auto stop = chrono::high_resolution_clock::now();
+                auto duration = chrono::duration_cast<chrono::nanoseconds>(stop - start);
+                trial_duration = duration.count();
                 total_duration += trial_duration;
             }
         output << total_duration/NUM_TRIALS << "\n";
