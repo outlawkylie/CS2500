@@ -24,10 +24,30 @@ int main()
     /****************************************
     *  Sort Random Trials
     *****************************************/
-    run_test((int)NORMAL_CASE, (int)HEAPSORT, (string)(NAME_NORMAL+"_"+NAME_HEAP+".txt"));
+    // Merge Sorts
+    run_test((int)NORMAL_CASE, (int)MERGESORT, (string)(NAME_NORMAL + "_" + NAME_MERGE + ".txt"));
+    run_test((int)BEST_CASE, (int)MERGESORT, (string)(NAME_BEST + "_" + NAME_MERGE + ".txt"));
+    run_test((int)WORST_CASE, (int)MERGESORT, (string)(NAME_WORST + "_" + NAME_MERGE + ".txt"));
+
+    // Quick Sorts
+    run_test((int)NORMAL_CASE, (int)QUICKSORT, (string)(NAME_NORMAL + "_" + NAME_QUICK + ".txt"));
+    run_test((int)BEST_CASE, (int)QUICKSORT, (string)(NAME_BEST + "_" + NAME_QUICK + ".txt"));
+    run_test((int)WORST_CASE, (int)QUICKSORT, (string)(NAME_WORST + "_" + NAME_QUICK + ".txt"));
+    
+    // Selection Sorts
     run_test((int)NORMAL_CASE, (int)SELECTIONSORT, (string)(NAME_NORMAL + "_" + NAME_SELECTION + ".txt"));
+    run_test((int)BEST_CASE, (int)SELECTIONSORT, (string)(NAME_BEST + "_" + NAME_SELECTION + ".txt"));
+    run_test((int)WORST_CASE, (int)SELECTIONSORT, (string)(NAME_WORST + "_" + NAME_SELECTION + ".txt"));
 
+    // Insertion Sorts
+    run_test((int)NORMAL_CASE, (int)INSERTIONSORT, (string)(NAME_NORMAL + "_" + NAME_INSERTION + ".txt"));
+    run_test((int)BEST_CASE, (int)INSERTIONSORT, (string)(NAME_BEST + "_" + NAME_INSERTION + ".txt"));
+    run_test((int)WORST_CASE, (int)INSERTIONSORT, (string)(NAME_WORST + "_" + NAME_INSERTION + ".txt"));
 
+    // Heap Sort
+    run_test((int)NORMAL_CASE, (int)HEAPSORT, (string)(NAME_NORMAL + "_" + NAME_HEAP + ".txt"));
+    run_test((int)BEST_CASE, (int)HEAPSORT, (string)(NAME_BEST + "_" + NAME_HEAP + ".txt"));
+    run_test((int)WORST_CASE, (int)HEAPSORT, (string)(NAME_WORST + "_" + NAME_HEAP + ".txt"));
 
     return 0;
     }

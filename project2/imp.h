@@ -44,9 +44,9 @@ const string NAME_HEAP      = "HEAPSORT";
 const string NAME_SELECTION = "SELECTIONSORT";
 const string NAME_INSERTION = "INSERTIONSORT";
 
-const short int NUM_TRIALS  = 1;
-const short int N_SKIP      = 10;
-const short int N_MAX       = 20;
+const short int NUM_TRIALS  = 20;
+const short int N_SKIP      = 1000;
+const short int N_MAX       = 5000;
 
 void run_test(int type, int sort, const string name);
 

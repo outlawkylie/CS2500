@@ -31,6 +31,7 @@ void run_test(int type, int sort, const string name)
     {
     /*  Variables  */
     long long trial_duration = 0;
+    long long total_duration = 0;
 
     /* Run the test */
     ofstream output(name); //setup output TXT file
@@ -66,7 +67,6 @@ void run_test(int type, int sort, const string name)
                 default:
                     break;
                 }
-            print_array(tester->unsorted_array, tester->size);
             /* Next, run the sort required for this test */
             switch ( sort )
                 {
@@ -75,11 +75,11 @@ void run_test(int type, int sort, const string name)
                     break;
 
                 case QUICKSORT:
-                    trial_duration = tester->quick_sort();
+                    trial_duration = tester->quick_sort( 0, tester->size-1);
                     break;
 
                 case MERGESORT:
-                    trial_duration = tester->merge_sort();
+                    trial_duration = tester->merge_sort(0, tester->size-1);
                     break;
 
                 case HEAPSORT:
@@ -92,9 +92,10 @@ void run_test(int type, int sort, const string name)
                 default:
                     break;
                 }
-            print_array(tester->unsorted_array, tester->size);
-
+                total_duration += trial_duration;
             }
+        output << total_duration/NUM_TRIALS << "\n";
         delete[] tester->unsorted_array;
+        delete tester;
         }
     }
