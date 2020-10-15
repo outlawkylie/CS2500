@@ -31,22 +31,29 @@ sortclass<T>::sortclass(short int arr_size)
 /******************************************************************
 *   NAME: insertion_sort()
 *
-*   DESCRIPTION: returns the amount of time in ns required to
-*                perform insertion sort
+*   PRECONDITION: Array A[n] exists with comparable values
+* 
+*   POSTCONDITION: Array A[1...n] is sorted
+* 
 ******************************************************************/
 template <typename T>
 void sortclass<T>::insertion_sort(void)
     {
+    // Invarient for loop: Array [0...i-1] is sorted
     for (int i = 1; i < size; i++)
         {
         T key = unsorted_array[i];
         int j = i;
+
+        // Invarient while loop: A[i-1] is largest in A[i-1...j]
         while (j > 0 && (unsorted_array[j - 1] > key))
             {
             unsorted_array[j] = unsorted_array[j - 1];
             j = j - 1;
             }
         unsorted_array[j] = key;
+        // Check invarient
+        assert( unsorted_array[i] >= unsorted_array[i-1]);
         }
     }
 
@@ -54,43 +61,56 @@ void sortclass<T>::insertion_sort(void)
 /******************************************************************
 *   NAME: quick_sort()
 *
-*   DESCRIPTION: sorts the array using quicksort method
+*   DESCRIPTION: Sorts unsorted_array[] member variable
+*                using quicksort method
+* 
+*   PRECONDITION:
+* 
+*   POSTCONDITION:
+* 
 ******************************************************************/
 template <typename T>
 void sortclass<T>::quick_sort( int low, int high )
     {
+    // verify that low < high (needed for successful algorithm)
+    assert( low < high );
+
+    // run the sort algorithm
     if (low < high)
         {
         int test = quick_sort_partition( low, high );
         quick_sort( low, test-1 );
         quick_sort( test+1, high );
         }
+    //ensure that the first array value is lesser than the following
+    assert( unsorted_array[low] <= unsorted_array[low+1]);
     }
 
 /******************************************************************
 *   NAME: quick_sort_partition()
 *
-*   DESCRIPTION: returns the amount of time in ns required to
-*                perform quick sort
+*   DESCRIPTION: Partitions array for quick_sort().
 ******************************************************************/
 template <typename T>
 int sortclass<T>::quick_sort_partition( int low, int high )
     {
-    int key = unsorted_array[high];
+    // verify that low < high (needed for successful algorithm)
+    assert(low < high);
+
+    int x = unsorted_array[high];
     int i = low-1;
     for (int j = low; j <= high - 1; j++)
         {
-        if (unsorted_array[j] < key)
+        if (unsorted_array[j] < x)
             {
             i++;
-            T temp = unsorted_array[j];
-            unsorted_array[j] = unsorted_array[i];
-            unsorted_array[i] = temp;
+            // swap A[j] & A[i]
+            swap(i, j);
             }
         }
-        T temp = unsorted_array[i+1];
-        unsorted_array[i+1] = unsorted_array[high];
-        unsorted_array[high] = temp;
+        // Swap A[i+1] and A[high]
+        assert( i == high+1 );
+        swap(i+1, high);
     return (i+1);
     }
 
@@ -99,15 +119,20 @@ int sortclass<T>::quick_sort_partition( int low, int high )
 /******************************************************************
 *   NAME: merge_sort()
 *
-*   DESCRIPTION: returns the amount of time in ns required to
-*                perform merge sort
+*   DESCRIPTION: Sorts unsorted_array[] member variable using
+*                merge sort method
+* 
+*   PRECONDITION:
+* 
+*   POSTCONDITION:
+* 
 ******************************************************************/
 template <typename T>
 void sortclass<T>::merge_sort( int low, int high )
     {
     int middle;
     // assert if low&high not valid or if array of size 0 or 1
-    assert(low<high); //check if low and high values are valid
+    assert(low < high); //check if low and high values are valid
     if (low < high)
         {
         middle = (low+high)/2;
@@ -119,19 +144,18 @@ void sortclass<T>::merge_sort( int low, int high )
 
 
 /******************************************************************
-*   NAME: merge_sort()
+*   NAME: merge()
 *
-*   DESCRIPTION: returns the amount of time in ns required to
-*                perform merge sort
+*   DESCRIPTION: Merges together two sorted arrays for merge_sort()
 ******************************************************************/
 template <typename T>
 void sortclass<T>::merge(int low, int high, int mid)
     {
-    int i, j, k;
+    int i = 0, j = 0, k = 0; //initialize variables for merge
     T * new_array = new T[size];
-    i = low;
-    k = low;
-    j = mid + 1;
+
+    //set up loop variables
+    i = low, k = low, j = mid + 1;
     while (i <= mid && j <= high) 
         {
         if (unsorted_array[i] < unsorted_array[j]) 
@@ -195,9 +219,7 @@ void sortclass<T>::max_heapify(T arr[], int sz, int i)
     // swap with root if the root isn't the largest currently
     if (largest != i)
         {
-        T temp = unsorted_array[i];
-        unsorted_array[i] = unsorted_array[largest];
-        unsorted_array[largest] = temp;
+        swap(i, largest);
 
         max_heapify(unsorted_array, sz, largest);
         }
@@ -209,8 +231,13 @@ void sortclass<T>::max_heapify(T arr[], int sz, int i)
 /******************************************************************
 *   NAME: heap_sort()
 *
-*   DESCRIPTION: returns the amount of time in ns required to
-*                perform heap sort
+*   DESCRIPTION: Sorts unsorted_array[] member variable using
+*                heap sort method
+* 
+*   PRECONDITION:
+* 
+*   POSTCONDITION:
+* 
 ******************************************************************/
 template <typename T>
 void sortclass<T>::heap_sort(void)
@@ -226,9 +253,7 @@ void sortclass<T>::heap_sort(void)
     for (int i = sz - 1; i > 0; i--)
         {
         // swap A[i] and A[0]
-        T temp = unsorted_array[0];
-        unsorted_array[0] = unsorted_array[i];
-        unsorted_array[i] = temp;
+        swap(0, i);
 
         max_heapify(unsorted_array, i, 0);
         }
@@ -238,8 +263,13 @@ void sortclass<T>::heap_sort(void)
 /******************************************************************
 *   NAME: selection_sort()
 *
-*   DESCRIPTION: returns the amount of time in ns required to
-                 perform selection sort
+*   DESCRIPTION: Sorts unsorted_array[] member variable using
+*                selection sort
+*
+*   PRECONDITION:
+* 
+*   POSTCONDITION:
+* 
 ******************************************************************/
 template <typename T>
 void sortclass<T>::selection_sort(void)
@@ -255,18 +285,18 @@ void sortclass<T>::selection_sort(void)
                 min = j;
                 }
             }
-        T temp = unsorted_array[min];
-        unsorted_array[min] = unsorted_array[i];
-        unsorted_array[i] = temp;
+        swap(min, i);
+        assert(unsorted_array[i]<unsorted_array[i+1]);
         }
+        
     }
 
 
 /******************************************************************
 *   NAME: array_to_bestcase()
 *
-*   DESCRIPTION: adjusts all elements in unsorted_array to be
-*                best case scenario
+*   DESCRIPTION: adjusts all elements in unsorted_array[] to be
+*                best case scenario (already sorted)
 ******************************************************************/
 template <typename T>
 void sortclass<T>::array_to_bestcase(void)
@@ -281,8 +311,8 @@ void sortclass<T>::array_to_bestcase(void)
 /******************************************************************
 *   NAME: array_to_worstcase()
 *
-*   DESCRIPTION: adjusts all elements in unsorted_array to be
-*                worst case scenario
+*   DESCRIPTION: adjusts all elements in unsorted_array[] to be
+*                worst case scenario (reverse sorted)
 ******************************************************************/
 template <typename T>
 void sortclass<T>::array_to_worstcase(void)
@@ -297,7 +327,7 @@ void sortclass<T>::array_to_worstcase(void)
 /******************************************************************
 *   NAME: array_to_bestcase()
 *
-*   DESCRIPTION: adjusts all elements in unsorted_array to be
+*   DESCRIPTION: adjusts all elements in unsorted_array[] to be
 *                random case scenario
 ******************************************************************/
 template <typename T>
@@ -313,7 +343,7 @@ void sortclass<T>::array_to_random(void)
 /******************************************************************
 *   NAME: array_to_same()
 *
-*   DESCRIPTION: adjusts all elements in unsorted_array to be same
+*   DESCRIPTION: adjusts all elements in unsorted_array[] to be same
 ******************************************************************/
 template <typename T>
 void sortclass<T>::array_to_same(void)
@@ -322,4 +352,18 @@ void sortclass<T>::array_to_same(void)
         {
         unsorted_array[i] = 1;
         }
+    }
+
+
+/******************************************************************
+*   NAME: swap()
+*
+*   DESCRIPTION: swaps unsorted_array[] elements x and y
+******************************************************************/
+template <typename T>
+void sortclass<T>::swap(int x, int y)
+    {
+    T temp = unsorted_array[x];
+    unsorted_array[x] = unsorted_array[y];
+    unsorted_array[y] = temp;
     }

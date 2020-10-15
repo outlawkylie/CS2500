@@ -43,8 +43,9 @@ class sortclass
         void selection_sort( void );
 
         // supporting sort functions
-        void max_heapify( T arr[], int size, int i ); 
-        int quick_sort_partition( int low, int high );
+        void swap(int x, int y); 
+        void max_heapify(T arr[], int size, int i); 
+        int quick_sort_partition(int low, int high);
         void merge(const int p, const int q, const int r);
 
     };
