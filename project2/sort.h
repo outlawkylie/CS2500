@@ -1,5 +1,5 @@
 // Author: Kylie Outlaw
-// Date: 9/27/2020
+// Date: 10/15/2020
 // Purpose: Class definition for the implementation of the insertion sort algorithm
 
 

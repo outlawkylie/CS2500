@@ -1,5 +1,5 @@
 // Author: Kylie Outlaw
-// Date: 9/27/2020
+// Date: 10/15/2020
 // Purpose: Sort class constructor and function definitions
 
 #include <iostream>
@@ -32,8 +32,8 @@ sortclass<T>::sortclass(short int arr_size)
 *   NAME: insertion_sort()
 *
 *   PRECONDITION: Array A[n] exists with comparable values
-* 
-*   POSTCONDITION: Array A[1...n] is sorted
+*
+*   POSTCONDITION: Array A[0...n-1] is sorted
 * 
 ******************************************************************/
 template <typename T>
@@ -64,9 +64,9 @@ void sortclass<T>::insertion_sort(void)
 *   DESCRIPTION: Sorts unsorted_array[] member variable
 *                using quicksort method
 * 
-*   PRECONDITION:
-* 
-*   POSTCONDITION:
+*   PRECONDITION: Array A[n] exists with comparable values
+*
+*   POSTCONDITION: Array A[0...n-1] is sorted
 * 
 ******************************************************************/
 template <typename T>
@@ -122,9 +122,9 @@ int sortclass<T>::quick_sort_partition( int low, int high )
 *   DESCRIPTION: Sorts unsorted_array[] member variable using
 *                merge sort method
 * 
-*   PRECONDITION:
-* 
-*   POSTCONDITION:
+*   PRECONDITION: Array A[n] exists with comparable values
+*
+*   POSTCONDITION: Array A[0...n-1] is sorted
 * 
 ******************************************************************/
 template <typename T>
@@ -133,6 +133,9 @@ void sortclass<T>::merge_sort( int low, int high )
     int middle;
     // assert if low&high not valid or if array of size 0 or 1
     assert(low < high); //check if low and high values are valid
+
+    // run through merge sort  for the first half, second half, then combine
+    // the two new sorted halves
     if (low < high)
         {
         middle = (low+high)/2;
@@ -154,23 +157,34 @@ void sortclass<T>::merge(int low, int high, int mid)
     int i = 0, j = 0, k = 0; //initialize variables for merge
     T * new_array = new T[size];
 
-    //set up loop variables
+    //set up loop counters, i for low side, j for high side
+    //and k to represent the current location in the new sorted array
     i = low, k = low, j = mid + 1;
+
+    // loop until every array value has been touched
     while (i <= mid && j <= high) 
         {
+        // if the value on left side is less than right side, 
+        //copy the left side value to new array and increment counters
         if (unsorted_array[i] < unsorted_array[j]) 
             {
             new_array[k] = unsorted_array[i];
             k++;
             i++;
             }
+        // otherwise, copy the right side value and increment counters
         else 
             {
             new_array[k] = unsorted_array[j];
             k++;
             j++;
             }
+        // check invarient each loop to make sure the values are
+        // each being updated in sorted order
+        assert(new_array[k] > new_array[k+1]);
         }
+    // if there are any remaining values on either side,
+    // copy over to new array and increment counters
     while (i <= mid) 
         {
         new_array[k] = unsorted_array[i];
@@ -183,11 +197,12 @@ void sortclass<T>::merge(int low, int high, int mid)
         k++;
         j++;
         }
+    // copy all the new, sorted values, back to the original array
     for (i = low; i < k; i++) 
         {
         unsorted_array[i] = new_array[i];
         }
-    delete new_array;
+    delete[] new_array; //clear memory
     }
     
 
@@ -220,8 +235,7 @@ void sortclass<T>::max_heapify(T arr[], int sz, int i)
     if (largest != i)
         {
         swap(i, largest);
-
-        max_heapify(unsorted_array, sz, largest);
+        max_heapify( unsorted_array, sz, largest);
         }
 
     return;
@@ -234,9 +248,9 @@ void sortclass<T>::max_heapify(T arr[], int sz, int i)
 *   DESCRIPTION: Sorts unsorted_array[] member variable using
 *                heap sort method
 * 
-*   PRECONDITION:
-* 
-*   POSTCONDITION:
+*   PRECONDITION: Array A[n] exists with comparable values
+*
+*   POSTCONDITION: Array A[0...n-1] is sorted
 * 
 ******************************************************************/
 template <typename T>
@@ -255,7 +269,7 @@ void sortclass<T>::heap_sort(void)
         // swap A[i] and A[0]
         swap(0, i);
 
-        max_heapify(unsorted_array, i, 0);
+        max_heapify( unsorted_array, i, 0);
         }
     }
 
@@ -266,26 +280,34 @@ void sortclass<T>::heap_sort(void)
 *   DESCRIPTION: Sorts unsorted_array[] member variable using
 *                selection sort
 *
-*   PRECONDITION:
-* 
-*   POSTCONDITION:
+*   PRECONDITION: Array A[n] exists with comparable values
+*
+*   POSTCONDITION: Array A[0...n-1] is sorted
 * 
 ******************************************************************/
 template <typename T>
 void sortclass<T>::selection_sort(void)
     {
-    int min=0, i=0, j=0; 
+    int min=0, i=0, j=0; // set up counters
+    
+    // for each value in the array, set the minimum = to the current i
     for ( i = 0; i < size; i++)
         {
         min = i;
+
+        // compare the values at min and each other value in the array
         for ( j = i + 1; j < size; j++)
             {
             if (unsorted_array[j] < unsorted_array[min])
                 {
+                //if a value is lower than the current min, set it to new min
                 min = j;
                 }
             }
+        //swap the newest minimum value with the old i value
         swap(min, i);
+
+        //check that the current index is now lesser than the one after it
         assert(unsorted_array[i]<unsorted_array[i+1]);
         }
         

@@ -1,5 +1,5 @@
 // Author: Kylie Outlaw
-// Date: 9/27/2020
+// Date: 10/15/2020
 // Purpose: Function definitions to support the insertion sort program
 
 
@@ -67,7 +67,8 @@ void run_test(int type, int sort, const string name)
                 default:
                     break;
                 }
-            /* Next, run the sort required for this test */
+
+            /* Next, run the sort required for this test after starting the clock */
             auto start = chrono::high_resolution_clock::now();
             switch ( sort )
                 {

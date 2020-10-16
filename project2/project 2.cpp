@@ -1,6 +1,7 @@
 // Author: Kylie Outlaw
-// Date: 9/27/2020
-// Purpose: Driver for the implementation of the insertion sort algorithm
+// Date: 10/15/2020
+// Purpose: Driver for the implementation of merge, 
+//          quick, selection, insertion, heap sorts
 
 
 #include <iostream>
@@ -28,7 +29,7 @@ int main()
     run_test((int)NORMAL_CASE, (int)MERGESORT, (string)(NAME_NORMAL + "_" + NAME_MERGE + ".txt"));
     run_test((int)BEST_CASE, (int)MERGESORT, (string)(NAME_BEST + "_" + NAME_MERGE + ".txt"));
     run_test((int)WORST_CASE, (int)MERGESORT, (string)(NAME_WORST + "_" + NAME_MERGE + ".txt"));
-
+    
     // Quick Sorts
     run_test((int)NORMAL_CASE, (int)QUICKSORT, (string)(NAME_NORMAL + "_" + NAME_QUICK + ".txt"));
     run_test((int)BEST_CASE, (int)QUICKSORT, (string)(NAME_BEST + "_" + NAME_QUICK + ".txt"));
