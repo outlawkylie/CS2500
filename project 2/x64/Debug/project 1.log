@@ -1,6 +1,0 @@
-﻿  imp.cpp
-  project 1.cpp
-  sort.cpp
-  Generating Code...
-C:\git\Algos\CS2500\project 1\project 1.cpp(17,16): warning C4244:  'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  project 1.vcxproj -> C:\git\Algos\CS2500\project 1\x64\Debug\project 1.exe
