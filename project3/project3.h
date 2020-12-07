@@ -2,6 +2,14 @@
 #ifndef PROJECT3_H
 #define PROJECT3_H
 
+/********************************************************
+Define which network will be used in the following #define
+********************************************************/
+#define NETWORK2 //NETWORK1 or NETWORK2
+
+/********************************************************
+Includes
+********************************************************/
 #include <iostream>
 #include <fstream>
 #include <assert.h>
@@ -20,7 +28,7 @@ const string NET2 = "network2.txt";
 /********************************************************
 Processes
 ********************************************************/
-char * getVertexList(string fil_name);
+char * setup(string fil_name);
 
 
 #endif

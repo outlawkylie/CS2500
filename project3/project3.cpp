@@ -4,5 +4,5 @@
 
 int main()
 {
-    char * x = getVertexList( NET1 );
+    char * x = setup( NET2 );
 }
