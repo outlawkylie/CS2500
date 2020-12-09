@@ -1,0 +1,25 @@
+Kylie Outlaw
+Input file:  network1.txt
+
+Input:
+s v1 16
+s v2 13
+v1 v3 12
+v2 v1 4
+v2 v4 14
+v3 v2 9
+v3 t 20
+v4 v3 7
+v4 t 4
+
+Output: 
+s v1 12/16
+s v2 11/13
+v1 v3 12/12
+v2 v1 0/4
+v2 v4 11/14
+v3 v2 0/9
+v3 t 19/20
+v4 v3 7/7
+v4 t 4/4
+Max flow in this network is 23

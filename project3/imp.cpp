@@ -1,7 +1,7 @@
 #include "project3.h"
 
 #if defined NETWORK1
-string NetworkVertices[] { "s", "v1", "v2", "v3", "v4", "t" }; ]
+string NetworkVertices[] { "s", "v1", "v2", "v3", "v4", "t" }; 
 #else
 string NetworkVertices[] { "s", "a", "b", "c", "d", "e", "f", "t" };
 #endif
@@ -23,14 +23,6 @@ void setup(string fil_name, int arr[][arrSZ], ofstream & out)
         map1.insert(make_pair(NetworkVertices[i], i));
         }
 
-
-    //map<string, int>::iterator it = map1.begin();
-    //while (it != map1.end())
-    //    {
-    //    cout << it->first << " :: " << it->second << std::endl;
-    //    it++;
-    //    }
-
     /* Open the file for the chosen network and parse data */
     ifstream file(fil_name); //create file stream for network
     assert(file.is_open()); //if asserting, file did not open correctly
@@ -40,10 +32,6 @@ void setup(string fil_name, int arr[][arrSZ], ofstream & out)
         getline( file, src, ',' );
         getline( file, dst, ',' );
         getline( file, length, '\n' );
-        if( file.eof() )
-            {
-            return; //check for end of file
-            }
         stringstream convert( length );
         convert >> len;
         out<<src<<" "<<dst<<" "<<len<<endl;
@@ -138,7 +126,7 @@ void output(int arr[][arrSZ], int r_arr[][arrSZ], ofstream& out)
             if(arr[i][j] != 0)
                 {
                 out << NetworkVertices[i] << " " << NetworkVertices[j] << " ";
-                out<< r_arr[i][j] << "/" << arr[i][j] << "\n";
+                out<< arr[i][j]-r_arr[i][j] << "/" << arr[i][j] << "\n";
                 }
             }
         }
