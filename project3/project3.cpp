@@ -3,6 +3,8 @@
 #include "project3.h"
 
 int main()
-{
-    char * x = setup( NET2 );
-}
+    {
+    int arr[arrSZ][arrSZ] = {0};
+    setup( NET, arr);
+    print(arr);
+    }

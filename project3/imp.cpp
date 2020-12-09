@@ -1,35 +1,36 @@
 #include "project3.h"
 
-char * setup(string fil_name)
+void setup(string fil_name, int arr[][arrSZ])
     {
+/* Define the name of vertices for networks 1 and 2 */
+#if defined NETWORK1
+    string NetworkVertices[] { "s", "v1", "v2", "v3", "v4", "t" };]
+#else
+    string NetworkVertices[] { "s", "a", "b", "c", "d", "e", "f", "t" };
+#endif
+
     string src, dst, length;
     int len;
     bool inVerticesList = false;
 
-    # if defined NETWORK1
-        string NetworkVertices[] { "s", "v1", "v2", "v3", "v4", "t" };
-        const int arrSZ = 6;
-    # else
-        string NetworkVertices[] { "s", "a", "b", "c", "d", "e", "f", "t" };
-        const int arrSZ = 8;
-    #endif
-
+    /* Set up a map to link vertice name (key) to adjacency matrix index (value) */
     map<string, int>map1;
 
+    /* Add each pair of string and index value to the map */
     for (int i = 0; i < sizeof(NetworkVertices)/sizeof(NetworkVertices[0]); i++)
         {
         map1.insert(make_pair(NetworkVertices[i], i));
         }
 
-    int arr[ arrSZ ][ arrSZ ] = { 0 };
 
-    map<string, int>::iterator it = map1.begin();
-    while (it != map1.end())
-        {
-        cout << it->first << " :: " << it->second << std::endl;
-        it++;
-        }
+    //map<string, int>::iterator it = map1.begin();
+    //while (it != map1.end())
+    //    {
+    //    cout << it->first << " :: " << it->second << std::endl;
+    //    it++;
+    //    }
 
+    /* Open the file for the chosen network and parse data */
     ifstream file(fil_name); //create file stream for network
     assert(file.is_open()); //if asserting, file did not open correctly
 
@@ -41,16 +42,22 @@ char * setup(string fil_name)
         stringstream convert( length );
         convert >> len;
 
+        /* Set adjacency matrix value to weight */
         arr[ (map1[ src ]) ][ (map1[ dst ]) ] = len;
         }
-    
-    for( int i = 0; i < arrSZ; i++ )
+
+    return;
+    }
+
+void print(int arr[][arrSZ])
+    {
+    for(int i = 0; i < arrSZ; i++)
         {
-        for( int j = 0; j < arrSZ; j++ )
+        for(int j = 0; j < arrSZ; j++)
             {
-            cout << arr[ i ][ j ] << " ";
+            cout << arr[i][j] << " ";
             }
         cout << endl;
         }
-        return NULL;
+    return;
     }

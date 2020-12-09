@@ -22,13 +22,21 @@ using namespace std;
 /********************************************************
 Variables & Constants
 ********************************************************/
-const string NET1 = "network1.txt";
-const string NET2 = "network2.txt";
+# if defined NETWORK1
+const int arrSZ = 6;
+const string NET = "network1.txt";
+
+# else
+const int arrSZ = 8;
+const string NET = "network2.txt";
+#endif
 
 /********************************************************
 Processes
 ********************************************************/
-char * setup(string fil_name);
+void setup(string fil_name, int arr[][arrSZ]);
+void print(int arr[][arrSZ]);
+
 
 
 #endif
