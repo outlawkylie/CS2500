@@ -54,6 +54,67 @@ void setup(string fil_name, int arr[][arrSZ], ofstream & out)
     return;
     }
 
+int FF(int arr[][arrSZ], int r_arr[][arrSZ])
+    {
+    int path[arrSZ] = { 0 }; /* store the path */
+    int max_flow = 0; /* max flow */
+    int flow = 9999999; /* set total flow to infinity */
+    int u; /* temp variable */
+
+    copy(arr, r_arr); /* copy adjacency matrix to residual */
+
+    while(djikstra(r_arr, path))
+        {
+        flow = 99999999;/* set up flow to be infinity */
+        for(int i = arrSZ - 1; i != 0; i = path[i])
+            {
+            u = path[i];
+            if( flow > r_arr[u][i]) { flow = r_arr[u][i]; }
+            }
+
+
+        for(int i = arrSZ - 1; i != 0; i = path[i])
+            {
+            u = path[i];
+            r_arr[i][u]+=flow;
+            r_arr[u][i]-=flow;
+            }
+
+        max_flow += flow;
+        }
+
+    return max_flow;
+    }
+
+
+bool djikstra(int r_arr[][arrSZ], int path[])
+    {
+    bool touched[arrSZ] = {false};
+
+    queue <int> pq; /* create priority queue */
+    pq.push(0);
+    touched[0] = true;
+    path[0] = -1;
+
+    while(!pq.empty())
+        {
+        int u = pq.front();
+        pq.pop();
+
+        for(int v = 0; v < arrSZ; v++)
+            {
+            if(touched[v] == false && r_arr[u][v] > 0)
+                {
+                pq.push(v);
+                path[v] = u;
+                touched[v] = true;
+                }
+            }
+        }
+        return (touched[arrSZ-1]==true);
+    }
+
+
 void print(int arr[][arrSZ])
     {
     for(int i = 0; i < arrSZ; i++)
@@ -67,15 +128,31 @@ void print(int arr[][arrSZ])
     return;
     }
 
-void output(int arr[][arrSZ], ofstream & out)
+void output(int arr[][arrSZ], int r_arr[][arrSZ], ofstream& out)
     {
-    out<<"\n"<<"Output: "<<"\n";
+    out << "\n" << "Output: " << "\n";
     for(int i = 0; i < arrSZ; i++)
         {
         for(int j = 0; j < arrSZ; j++)
             {
-            out << NetworkVertices[i]  << " " << NetworkVertices[j] << " " << arr[i][j] << "\n";
+            if(arr[i][j] != 0)
+                {
+                out << NetworkVertices[i] << " " << NetworkVertices[j] << " ";
+                out<< r_arr[i][j] << "/" << arr[i][j] << "\n";
+                }
             }
         }
     return;
+    }
+
+
+void copy(int src[][arrSZ], int dst[][arrSZ])
+    {
+    for(int i = 0; i < arrSZ; i++)
+        {
+        for(int j = 0; j < arrSZ; j++)
+            {
+            dst[i][j] = src[i][j];
+            }
+        }
     }

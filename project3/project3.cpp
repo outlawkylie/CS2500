@@ -4,10 +4,16 @@
 
 int main()
     {
+    int arr[arrSZ][arrSZ] = { 0 };   /* create adjacency matrix */
+    int r_arr[arrSZ][arrSZ] = { 0 }; /* create resudial matrix  */
+
+    print(arr);
+    int max_flow = 0;
+
     ofstream out(OUT);
     out<<"Kylie Outlaw\nInput file:  "<<NET<<"\n\nInput:"<<endl;
-    int arr[arrSZ][arrSZ] = {0};
     setup( NET, arr, out);
-    print(arr);
-    output(arr, out);
+    output(arr, r_arr, out);
+    max_flow = FF(arr, r_arr);
+    out<<"Max flow in this network is "<<max_flow;
     }

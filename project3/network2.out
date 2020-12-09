@@ -21,3 +21,25 @@ e d 6
 e t 23
 f b 13
 f e 5
+
+Output: 
+s a 0/20
+s b 0/10
+s c 0/15
+a b 0/1
+a c 0/2
+a e 0/5
+a f 0/4
+b c 0/2
+c d 0/3
+c e 0/5
+c t 0/10
+d a 0/30
+d b 0/9
+d f 0/11
+d t 0/20
+e d 0/6
+e t 0/23
+f b 0/13
+f e 0/5
+Max flow in this network is 27

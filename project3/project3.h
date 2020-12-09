@@ -17,6 +17,7 @@ Includes
 #include <array>
 #include <sstream>
 #include <map>
+#include <queue>
 using namespace std;
 
 /********************************************************
@@ -38,8 +39,10 @@ Processes
 ********************************************************/
 void setup(string fil_name, int arr[][arrSZ], ofstream & out);
 void print(int arr[][arrSZ]);
-void output(int arr[][arrSZ], ofstream & out);
-
+void output(int arr[][arrSZ], int r_arr[][arrSZ], ofstream & out);
+int FF(int arr[][arrSZ], int r_arr[][arrSZ]);
+void copy(int src[][arrSZ], int dst[][arrSZ]);
+bool djikstra( int r_arr[][arrSZ], int path[]);
 
 
 #endif
