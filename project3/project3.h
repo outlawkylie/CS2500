@@ -25,17 +25,20 @@ Variables & Constants
 # if defined NETWORK1
 const int arrSZ = 6;
 const string NET = "network1.txt";
+const string OUT = "network1.out";
 
 # else
 const int arrSZ = 8;
 const string NET = "network2.txt";
+const string OUT = "network2.out";
 #endif
 
 /********************************************************
 Processes
 ********************************************************/
-void setup(string fil_name, int arr[][arrSZ]);
+void setup(string fil_name, int arr[][arrSZ], ofstream & out);
 void print(int arr[][arrSZ]);
+void output(int arr[][arrSZ], ofstream & out);
 
 
 

@@ -4,7 +4,10 @@
 
 int main()
     {
+    ofstream out(OUT);
+    out<<"Kylie Outlaw\nInput file:  "<<NET<<"\n\nInput:"<<endl;
     int arr[arrSZ][arrSZ] = {0};
-    setup( NET, arr);
+    setup( NET, arr, out);
     print(arr);
+    output(arr, out);
     }

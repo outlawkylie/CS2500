@@ -1,0 +1,23 @@
+Kylie Outlaw
+Input file:  network2.txt
+
+Input:
+s b 10
+s c 15
+s a 20
+a b 1
+a c 2
+a f 4
+a e 5
+b c 2
+c d 3
+c e 5
+c t 10
+d a 30
+d b 9
+d f 11
+d t 20
+e d 6
+e t 23
+f b 13
+f e 5

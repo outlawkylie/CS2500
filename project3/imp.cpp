@@ -1,13 +1,14 @@
 #include "project3.h"
 
-void setup(string fil_name, int arr[][arrSZ])
+#if defined NETWORK1
+string NetworkVertices[] { "s", "v1", "v2", "v3", "v4", "t" }; ]
+#else
+string NetworkVertices[] { "s", "a", "b", "c", "d", "e", "f", "t" };
+#endif
+
+void setup(string fil_name, int arr[][arrSZ], ofstream & out)
     {
 /* Define the name of vertices for networks 1 and 2 */
-#if defined NETWORK1
-    string NetworkVertices[] { "s", "v1", "v2", "v3", "v4", "t" };]
-#else
-    string NetworkVertices[] { "s", "a", "b", "c", "d", "e", "f", "t" };
-#endif
 
     string src, dst, length;
     int len;
@@ -39,9 +40,13 @@ void setup(string fil_name, int arr[][arrSZ])
         getline( file, src, ',' );
         getline( file, dst, ',' );
         getline( file, length, '\n' );
+        if( file.eof() )
+            {
+            return; //check for end of file
+            }
         stringstream convert( length );
         convert >> len;
-
+        out<<src<<" "<<dst<<" "<<len<<endl;
         /* Set adjacency matrix value to weight */
         arr[ (map1[ src ]) ][ (map1[ dst ]) ] = len;
         }
@@ -58,6 +63,19 @@ void print(int arr[][arrSZ])
             cout << arr[i][j] << " ";
             }
         cout << endl;
+        }
+    return;
+    }
+
+void output(int arr[][arrSZ], ofstream & out)
+    {
+    out<<"\n"<<"Output: "<<"\n";
+    for(int i = 0; i < arrSZ; i++)
+        {
+        for(int j = 0; j < arrSZ; j++)
+            {
+            out << NetworkVertices[i]  << " " << NetworkVertices[j] << " " << arr[i][j] << "\n";
+            }
         }
     return;
     }
