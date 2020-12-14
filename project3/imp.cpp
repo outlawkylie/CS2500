@@ -62,7 +62,7 @@ int FF(int arr[][arrSZ], int r_arr[][arrSZ])
     {
     int path[arrSZ] = { 0 }; /* store the path */
     int max_flow = 0; /* max flow */
-    int flow = 9999999; /* set total flow to infinity */
+    int flow = 9999999; /* set total flow to "infinity" */
     int u; /* temp variable */
 
     copy(arr, r_arr); /* copy adjacency matrix to residual */
