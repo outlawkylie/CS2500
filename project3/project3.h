@@ -1,4 +1,9 @@
-#pragma once
+/********************************************************
+File: project3.h
+Programmer: Kylie Outlaw
+Purpose: Stores includes for project, global vriables,
+and function declaratins
+********************************************************/
 #ifndef PROJECT3_H
 #define PROJECT3_H
 
