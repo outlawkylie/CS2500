@@ -11,7 +11,7 @@ and function declaratins
 Define which network will be used in the following #define
 Current choices: NETWORK1 or NETWORK2
 ********************************************************/
-#define NETWORK1 
+#define NETWORK2 
 
 /********************************************************
 Includes

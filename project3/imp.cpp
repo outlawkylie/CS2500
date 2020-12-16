@@ -72,10 +72,9 @@ int FF(int arr[][arrSZ], int r_arr[][arrSZ])
     copy(arr, r_arr); /* copy adjacency matrix to residual */
 
     /* keep running find_path() until the sink has been touched */
-    assert(max_flow == 0); /* pre-condition */
+    assert(max_flow == 0); /* initialization */
     while(find_path(r_arr, path))
         {
-        assert(max_flow >= 0); /* check that the max flow is within acceptable range */
         flow = 99999999; /* set up flow to be infinity */
         /* for each vertice in the path, update the flow 
         to be the lowest of the current & residual path */
@@ -92,7 +91,7 @@ int FF(int arr[][arrSZ], int r_arr[][arrSZ])
             r_arr[i][u]+=flow;
             r_arr[u][i]-=flow;
             }
-        assert(flow >= 0); // 
+        assert(( flow > 0 ) && (max_flow >= 0)); /* maintenance */
         /* update the max flow to include the new path's flow */
         max_flow += flow;
         }
@@ -103,7 +102,8 @@ int FF(int arr[][arrSZ], int r_arr[][arrSZ])
 
 /********************************************************
 Pre: r_arr is filled with valid residual path data
-Post: returns T/F if the sink has been touched yet
+Post: returns T/F if there is a path from s to t and
+updates path[] to be a valid path from s to t if possible
 ********************************************************/
 bool find_path(int r_arr[][arrSZ], int path[])
     {
