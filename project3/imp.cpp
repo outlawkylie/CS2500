@@ -12,7 +12,6 @@ string NetworkVertices[] { "s", "v1", "v2", "v3", "v4", "t" };
 #if defined NETWORK2
 string NetworkVertices[] { "s", "a", "b", "c", "d", "e", "f", "t" };
 #endif
-
 /********************************************************
 Pre: fil_name must be valid
 Post: arr is filled with valid data from fil_name and 
@@ -63,19 +62,18 @@ int FF(int arr[][arrSZ], int r_arr[][arrSZ])
     {
     int path[arrSZ] = { 0 }; /* store the path */
     int max_flow = 0; /* max flow */
-    int flow = 9999999; /* set total flow to "infinity" */
+    int flow = INT_MAX; /* set total flow to "infinity" */
     int u; /* temp variable */
     int total_s = 0; /* total src output */
     int total_t = 0; /* total sink input */
     
     get_total(arr, total_s, total_t);
-    cout << "total src: " << total_s << "\ntotal sink: " << total_t << endl;
-
+    if( (total_s == 0) || (total_t == 0) ) { return 0; } /* exit if no flow */
     copy(arr, r_arr); /* copy adjacency matrix to residual */
 
-    /* keep running dijkastra() until the sink has been touched */
+    /* keep running find_path() until the sink has been touched */
     assert(max_flow == 0); /* pre-condition */
-    while(djikstra(r_arr, path))
+    while(find_path(r_arr, path))
         {
         assert(max_flow >= 0); /* check that the max flow is within acceptable range */
         flow = 99999999; /* set up flow to be infinity */
@@ -107,7 +105,7 @@ int FF(int arr[][arrSZ], int r_arr[][arrSZ])
 Pre: r_arr is filled with valid residual path data
 Post: returns T/F if the sink has been touched yet
 ********************************************************/
-bool djikstra(int r_arr[][arrSZ], int path[])
+bool find_path(int r_arr[][arrSZ], int path[])
     {
     bool touched[arrSZ] = {false};
 
@@ -135,7 +133,7 @@ bool djikstra(int r_arr[][arrSZ], int path[])
             }
         }
         return (touched[arrSZ-1]==true);
-    } /* dijkstra() */
+    } /* find_path() */
 
 /********************************************************
 Pre: arr is filled with valid data
@@ -168,6 +166,7 @@ void output(int arr[][arrSZ], int r_arr[][arrSZ], ofstream& out)
             if(arr[i][j] != 0)
                 {
                 out << NetworkVertices[i] << " " << NetworkVertices[j] << " ";
+                out << "  flow: ";
                 out<< arr[i][j]-r_arr[i][j] << "/" << arr[i][j] << "\n";
                 }
             }
@@ -203,6 +202,5 @@ void get_total(int arr[][arrSZ], int & s, int & t)
         s += arr[0][i];
         t += arr[i][arrSZ - 1];
         }
-    cout << "total src: " << s << "\ntotal sink: " << t << endl;
     return;
     }

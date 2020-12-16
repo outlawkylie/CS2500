@@ -9,8 +9,9 @@ and function declaratins
 
 /********************************************************
 Define which network will be used in the following #define
+Current choices: NETWORK1 or NETWORK2
 ********************************************************/
-#define NETWORK2 //NETWORK1 or NETWORK2
+#define NETWORK1 
 
 /********************************************************
 Includes
@@ -39,7 +40,6 @@ const int arrSZ = 8;
 const string NET = "network2.txt";
 const string OUT = "network2.out";
 #endif
-
 /********************************************************
 Processes
 ********************************************************/
@@ -48,7 +48,7 @@ void print(int arr[][arrSZ]);
 void output(int arr[][arrSZ], int r_arr[][arrSZ], ofstream & out);
 int FF(int arr[][arrSZ], int r_arr[][arrSZ]);
 void copy(int src[][arrSZ], int dst[][arrSZ]);
-bool djikstra( int r_arr[][arrSZ], int path[]);
+bool find_path( int r_arr[][arrSZ], int path[]);
 void get_total(int arr[][arrSZ], int & s, int & t);
 
 
