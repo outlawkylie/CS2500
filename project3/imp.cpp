@@ -8,7 +8,8 @@ declared in project3.h
 
 #if defined NETWORK1
 string NetworkVertices[] { "s", "v1", "v2", "v3", "v4", "t" }; 
-#else
+#endif
+#if defined NETWORK2
 string NetworkVertices[] { "s", "a", "b", "c", "d", "e", "f", "t" };
 #endif
 
@@ -64,12 +65,19 @@ int FF(int arr[][arrSZ], int r_arr[][arrSZ])
     int max_flow = 0; /* max flow */
     int flow = 9999999; /* set total flow to "infinity" */
     int u; /* temp variable */
+    int total_s = 0; /* total src output */
+    int total_t = 0; /* total sink input */
+    
+    get_total(arr, total_s, total_t);
+    cout << "total src: " << total_s << "\ntotal sink: " << total_t << endl;
 
     copy(arr, r_arr); /* copy adjacency matrix to residual */
 
     /* keep running dijkastra() until the sink has been touched */
+    assert(max_flow == 0); /* pre-condition */
     while(djikstra(r_arr, path))
         {
+        assert(max_flow >= 0); /* check that the max flow is within acceptable range */
         flow = 99999999; /* set up flow to be infinity */
         /* for each vertice in the path, update the flow 
         to be the lowest of the current & residual path */
@@ -86,11 +94,12 @@ int FF(int arr[][arrSZ], int r_arr[][arrSZ])
             r_arr[i][u]+=flow;
             r_arr[u][i]-=flow;
             }
-
+        assert(flow >= 0); // 
         /* update the max flow to include the new path's flow */
         max_flow += flow;
         }
-
+    /* Termination for FF loop invariant */
+    assert((max_flow >= 0) && (max_flow < total_s) && (max_flow < total_t));
     return max_flow;
     } /* FF() */
 
@@ -179,4 +188,21 @@ void copy(int src[][arrSZ], int dst[][arrSZ])
             dst[i][j] = src[i][j];
             }
         }
+    return;
     } /* copy() */
+
+/********************************************************
+Pre: arr is filled with valid data
+Post: s and t are integers representing output of source
+and the input of the sink
+********************************************************/
+void get_total(int arr[][arrSZ], int & s, int & t)
+    {
+    for( int i = 0; i < arrSZ; i++ )
+        {
+        s += arr[0][i];
+        t += arr[i][arrSZ - 1];
+        }
+    cout << "total src: " << s << "\ntotal sink: " << t << endl;
+    return;
+    }

@@ -33,7 +33,8 @@ const int arrSZ = 6;
 const string NET = "network1.txt";
 const string OUT = "network1.out";
 
-# else
+# endif
+#if defined NETWORK2
 const int arrSZ = 8;
 const string NET = "network2.txt";
 const string OUT = "network2.out";
@@ -48,6 +49,7 @@ void output(int arr[][arrSZ], int r_arr[][arrSZ], ofstream & out);
 int FF(int arr[][arrSZ], int r_arr[][arrSZ]);
 void copy(int src[][arrSZ], int dst[][arrSZ]);
 bool djikstra( int r_arr[][arrSZ], int path[]);
+void get_total(int arr[][arrSZ], int & s, int & t);
 
 
 #endif
